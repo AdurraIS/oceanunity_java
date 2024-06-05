@@ -1,4 +1,4 @@
-package com.oceanunity.app.Entities;
+package com.oceanunity.app.Models.Entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -27,4 +28,8 @@ public class Alerta {
     private LocalDateTime data;
     @Column(name = "resolucao_alerta")
     private String resolucao;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "alerta")
+    private Set<Leitura> leituras;
+
 }

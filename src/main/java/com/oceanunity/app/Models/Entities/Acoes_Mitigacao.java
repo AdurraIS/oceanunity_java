@@ -1,4 +1,4 @@
-package com.oceanunity.app.Entities;
+package com.oceanunity.app.Models.Entities;
 
 
 import jakarta.persistence.*;
@@ -30,4 +30,10 @@ public class Acoes_Mitigacao {
     private LocalDateTime dataFim;
     @Column(name = "status_acao")
     private String status;
+
+    @ManyToOne
+    private Empresa empresa;
+    @ManyToOne
+    private Poluente poluente;
+
 }

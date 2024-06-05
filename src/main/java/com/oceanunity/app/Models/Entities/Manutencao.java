@@ -1,4 +1,4 @@
-package com.oceanunity.app.Entities;
+package com.oceanunity.app.Models.Entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,5 +24,10 @@ public class Manutencao {
     private String descricao;
     @Column(name = "data_manutencao")
     private LocalDateTime data;
+
+    @ManyToOne
+    private Sensor sensor;
+    @ManyToOne
+    private Empresa empresa;
 
 }

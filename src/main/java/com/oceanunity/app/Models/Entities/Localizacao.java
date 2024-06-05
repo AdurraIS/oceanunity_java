@@ -1,10 +1,12 @@
-package com.oceanunity.app.Entities;
+package com.oceanunity.app.Models.Entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Entity
 @Getter
@@ -24,5 +26,7 @@ public class Localizacao {
     private int longitude;
     @Column(name = "descricao_local")
     private String descricao;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "localizacao")
+    private Set<Sensor> sensores;
 
 }

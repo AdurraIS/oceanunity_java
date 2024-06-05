@@ -1,4 +1,4 @@
-package com.oceanunity.app.Entities;
+package com.oceanunity.app.Models.Entities;
 
 
 import jakarta.persistence.*;
@@ -26,5 +26,7 @@ public class Usuario {
     private String senha;
     @Column(name = "tel_usuario")
     private String telefone;
+    @ManyToOne
+    private Empresa empresa;
 
 }

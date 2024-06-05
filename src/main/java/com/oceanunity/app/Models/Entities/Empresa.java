@@ -1,10 +1,12 @@
-package com.oceanunity.app.Entities;
+package com.oceanunity.app.Models.Entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Entity
 @Getter
@@ -25,5 +27,12 @@ public class Empresa {
     private String uf;
     @Column(name = "tel_empresa")
     private String telefone;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empresa")
+    private Set<Usuario> usuarios;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empresa")
+    private Set<Acoes_Mitigacao> acoes;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empresa")
+    private Set<Sensor> sensores;
 
 }

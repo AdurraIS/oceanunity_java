@@ -1,10 +1,12 @@
-package com.oceanunity.app.Entities;
+package com.oceanunity.app.Models.Entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Entity
 @Getter
@@ -26,5 +28,8 @@ public class Parametro {
     @Column(name = "desc_parametro")
     private String descricao;
 
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parametro")
+    private Set<Poluente> poluentes;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parametro")
+    private Set<Leitura> leituras;
 }

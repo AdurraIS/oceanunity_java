@@ -1,4 +1,4 @@
-package com.oceanunity.app.Entities;
+package com.oceanunity.app.Models.Entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,5 +24,14 @@ public class Leitura {
     private float valor;
     @Column(name = "data_leitura")
     private LocalDateTime data;
+
+    @ManyToOne
+    private Poluente poluente;
+    @ManyToOne
+    private Parametro parametro;
+    @ManyToOne
+    private Sensor sensor;
+    @ManyToOne
+    private Alerta alerta;
 
 }
