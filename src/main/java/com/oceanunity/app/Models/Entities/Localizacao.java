@@ -27,6 +27,6 @@ public class Localizacao {
     @Column(name = "descricao_local")
     private String descricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "localizacao")
-    private Set<Sensor> sensores;
+    private Set<Sensor> sensors;
 
 }

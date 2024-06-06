@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -34,8 +35,7 @@ public class Leitura {
     @ManyToOne
     @JoinColumn(name = "id_sensor", referencedColumnName = "id_sensor")
     private Sensor sensor;
-    @ManyToOne
-    @JoinColumn(name = "id_alerta", referencedColumnName = "id_alerta")
-    private Alerta alerta;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "leitura")
+    private Set<Alerta> alertas;
 
 }

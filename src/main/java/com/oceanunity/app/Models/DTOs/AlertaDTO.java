@@ -23,6 +23,8 @@ public class AlertaDTO {
     private LocalDateTime data;
     @NotBlank(message = "Campo resolução não pode ser vazio")
     private String resolucao;
+    @NotNull(message = "Campo id da leitura não pode ser nulo")
+    private Long leituraId;
 
     public AlertaDTO(Alerta alerta) {
         this.id = alerta.getId();
@@ -30,5 +32,6 @@ public class AlertaDTO {
         this.descricao = alerta.getDescricao();
         this.data = alerta.getData();
         this.resolucao = alerta.getResolucao();
+        this.leituraId = alerta.getLeitura().getId();
     }
 }

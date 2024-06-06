@@ -26,8 +26,6 @@ public class LeituraDTO {
     private Long parametroId;
     @NotNull(message = "Campo id do sensor não pode ser nulo")
     private Long sensorId;
-    @NotNull(message = "Campo id do alerta não pode ser nulo")
-    private Long alertaId;
 
     public LeituraDTO(Leitura leitura) {
         this.id = leitura.getId();
@@ -36,6 +34,5 @@ public class LeituraDTO {
         this.poluenteId = leitura.getPoluente().getId();
         this.parametroId = leitura.getParametro().getId();
         this.sensorId = leitura.getSensor().getId();
-        this.alertaId = leitura.getAlerta().getId();
     }
 }
