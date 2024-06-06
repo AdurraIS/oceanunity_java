@@ -26,8 +26,10 @@ public class Manutencao {
     private LocalDateTime data;
 
     @ManyToOne
+    @JoinColumn(name = "id_sensor", referencedColumnName = "id_sensor")
     private Sensor sensor;
     @ManyToOne
+    @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa")
     private Empresa empresa;
 
 }

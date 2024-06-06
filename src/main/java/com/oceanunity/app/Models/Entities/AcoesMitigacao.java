@@ -32,8 +32,10 @@ public class AcoesMitigacao {
     private String status;
 
     @ManyToOne
+    @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa")
     private Empresa empresa;
     @ManyToOne
+    @JoinColumn(name = "id_poluente", referencedColumnName = "id_poluente")
     private Poluente poluente;
 
 }

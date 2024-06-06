@@ -31,5 +31,6 @@ public class Poluente {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "poluente")
     private Set<Sensor> sensores;
     @ManyToOne
+    @JoinColumn(name = "id_parametro", referencedColumnName = "id_parametro")
     private Parametro parametro;
 }

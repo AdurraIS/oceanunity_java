@@ -27,6 +27,7 @@ public class Usuario {
     @Column(name = "tel_usuario")
     private String telefone;
     @ManyToOne
+    @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa")
     private Empresa empresa;
 
 }

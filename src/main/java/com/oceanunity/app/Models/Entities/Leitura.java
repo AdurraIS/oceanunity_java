@@ -26,12 +26,16 @@ public class Leitura {
     private LocalDateTime data;
 
     @ManyToOne
+    @JoinColumn(name = "id_poluente", referencedColumnName = "id_poluente")
     private Poluente poluente;
     @ManyToOne
+    @JoinColumn(name = "id_parametro", referencedColumnName = "id_parametro")
     private Parametro parametro;
     @ManyToOne
+    @JoinColumn(name = "id_sensor", referencedColumnName = "id_sensor")
     private Sensor sensor;
     @ManyToOne
+    @JoinColumn(name = "id_alerta", referencedColumnName = "id_alerta")
     private Alerta alerta;
 
 }
