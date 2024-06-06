@@ -31,7 +31,7 @@ public class Empresa {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "empresa")
     private Set<Usuario> usuarios;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "empresa")
-    private Set<Acoes_Mitigacao> acoes;
+    private Set<AcoesMitigacao> acoes;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "empresa")
     private Set<Sensor> sensores;
 

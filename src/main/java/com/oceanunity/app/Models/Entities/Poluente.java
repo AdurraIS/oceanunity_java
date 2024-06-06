@@ -25,7 +25,7 @@ public class Poluente {
     private String descricao;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "poluente")
-    private Set<Acoes_Mitigacao> acoes;
+    private Set<AcoesMitigacao> acoes;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "poluente")
     private Set<Leitura> leituras;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "poluente")
