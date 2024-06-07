@@ -30,6 +30,18 @@ detectar plásticos na superfície da areia, podendo tanto ser utilizada em came
 - Lombok
 - Bean Validation
 - Oauth
+### Endpoints para teste:
+#### 1° Passo criar Empresa
+- /api/v1/empresas
+#### 2° Passo criar/registrar Usuario
+- /auth/register
+#### 3° Passo Login Usuario
+- /auth/login
+#### 4° Passo
+- Testar qualquer endpoint de acordo com a ROLE do Usuario que voce fez Login
+
+### Principais Endpoints
+  
 ## Equipe:
 | Registro | Nome  | Responsabilidade | Disciplinas|
 | ------------- | ------------- | ------------- | ------------- |
