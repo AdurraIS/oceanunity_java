@@ -10,7 +10,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class EmpresaDTO {
-    @NotNull(message = "Campo id não pode ser nulo")
     private Long id;
     @NotBlank(message = "Campo nome não pode ser vazio")
     private String nome;

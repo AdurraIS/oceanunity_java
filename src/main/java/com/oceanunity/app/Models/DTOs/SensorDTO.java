@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class SensorDTO {
 
-    @NotNull(message = "Campo id não pode ser nulo")
     private Long id;
     @NotBlank(message = "Campo modelo não pode ser vazio")
     private String modelo;
