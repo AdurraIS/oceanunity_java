@@ -20,6 +20,25 @@ public class AcoesMitigacaoController {
     public AcoesMitigacaoController(AcoesMitigacaoService acoesMitigacaoService) {
         this.acoesMitigacaoService = acoesMitigacaoService;
     }
+    @GetMapping("/empresa/{empresaId}")
+    public ResponseEntity<Page<AcoesMitigacaoDTO>> findAllByEmpresa(@RequestParam(name = "page", defaultValue = "0") int page,
+                                                                    @RequestParam(name = "size", defaultValue = "10") int size, long empresaId){
+        PageRequest pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(acoesMitigacaoService.findAllByEmpresa(pageable, empresaId));
+    }
+    @GetMapping("/poluente/{poluenteId}")
+    public ResponseEntity<Page<AcoesMitigacaoDTO>> findAllByPoluente(@RequestParam(name = "page", defaultValue = "0") int page,
+                                                                    @RequestParam(name = "size", defaultValue = "10") int size, long poluenteId){
+        PageRequest pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(acoesMitigacaoService.findAllByPoluente(pageable, poluenteId));
+    }
+    @GetMapping("/empresa/{empresaId}/poluente/{poluenteId}")
+    public ResponseEntity<Page<AcoesMitigacaoDTO>> findAllByEmpresaAndPoluente(@RequestParam(name = "page", defaultValue = "0") int page,
+                                                                    @RequestParam(name = "size", defaultValue = "10") int size,
+                                                                               long empresaId, long poluenteId){
+        PageRequest pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(acoesMitigacaoService.findAllByEmpresaAndPoluente(pageable, empresaId,poluenteId ));
+    }
 
     @GetMapping("/acoesMitigacao/{id}")
     public ResponseEntity<Page<AcoesMitigacaoDTO>> findAll(@RequestParam(name = "page", defaultValue = "0") int page,

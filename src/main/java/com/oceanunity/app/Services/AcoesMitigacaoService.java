@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Set;
+
 @Service
 public class AcoesMitigacaoService {
 
@@ -25,7 +27,18 @@ public class AcoesMitigacaoService {
         this.empresaRepository = empresaRepository;
         this.poluenteRepository = poluenteRepository;
     }
-
+    // Método para buscar todas as Ações por Empresa
+    public Page<AcoesMitigacaoDTO> findAllByEmpresa(Pageable pageable, Long empresaId){
+        return acoesMitigacaoRepository.findByEmpresa(pageable, empresaId).map(AcoesMitigacaoDTO::new);
+    }
+    // Método para buscar todas as Ações por Empresa e Poluente
+    public Page<AcoesMitigacaoDTO> findAllByEmpresaAndPoluente(Pageable pageable, Long empresaId, Long poluenteId){
+        return acoesMitigacaoRepository.findByPoluenteAndEmpresa(pageable, empresaId, poluenteId).map(AcoesMitigacaoDTO::new);
+    }
+    //Método busca todas ações por Poluente
+    public Page<AcoesMitigacaoDTO> findAllByPoluente(Pageable pageable, Long poluenteId){
+        return acoesMitigacaoRepository.findByPoluente(pageable, poluenteId).map(AcoesMitigacaoDTO::new);
+    }
     // Método para criar AcoesMitigacao
     public AcoesMitigacaoDTO create(AcoesMitigacaoDTO data){
         AcoesMitigacao acoesMitigacao = new AcoesMitigacao();

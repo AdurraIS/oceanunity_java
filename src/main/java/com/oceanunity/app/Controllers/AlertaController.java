@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/api/v1/alertas")
@@ -20,8 +21,12 @@ public class AlertaController {
     public AlertaController(AlertaService alertaService) {
         this.alertaService = alertaService;
     }
+    @GetMapping("/leitura/{leituraId}")
+    public ResponseEntity<Set<AlertaDTO>> findByLeitura(Long leituraId){
+        return ResponseEntity.ok(alertaService.findByLeitura(leituraId));
 
-    @GetMapping("/alerta/{id}")
+    }
+    @GetMapping("/")
     public ResponseEntity<Page<AlertaDTO>> findAll(@RequestParam(name = "page", defaultValue = "0") int page,
                                                    @RequestParam(name = "size", defaultValue = "10") int size){
         PageRequest pageable = PageRequest.of(page, size);
