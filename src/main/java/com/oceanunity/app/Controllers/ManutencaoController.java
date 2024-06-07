@@ -2,11 +2,11 @@ package com.oceanunity.app.Controllers;
 
 import com.oceanunity.app.Models.DTOs.ManutencaoDTO;
 import com.oceanunity.app.Services.ManutencaoService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -28,14 +28,14 @@ public class ManutencaoController {
         return ResponseEntity.ok(manutencaoService.findAllPageable(pageable));
     }
     @PostMapping
-    public ResponseEntity<ManutencaoDTO> create(@RequestBody @Validated ManutencaoDTO data){
+    public ResponseEntity<ManutencaoDTO> create(@RequestBody @Valid ManutencaoDTO data){
         ManutencaoDTO createdManutencaoDTO = manutencaoService.create(data);
         return ResponseEntity.created(URI.create("/api/v1/manutencaos/" + createdManutencaoDTO.getId()))
                 .body(createdManutencaoDTO);
     }
 
     @PutMapping
-    public ResponseEntity<Void> update(@RequestBody @Validated ManutencaoDTO data){
+    public ResponseEntity<Void> update(@RequestBody @Valid ManutencaoDTO data){
         manutencaoService.update(data);
         return ResponseEntity.noContent().build();
     }

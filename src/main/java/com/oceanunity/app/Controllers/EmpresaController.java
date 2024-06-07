@@ -2,11 +2,11 @@ package com.oceanunity.app.Controllers;
 
 import com.oceanunity.app.Models.DTOs.EmpresaDTO;
 import com.oceanunity.app.Services.EmpresaService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -28,14 +28,14 @@ public class EmpresaController {
         return ResponseEntity.ok(empresaService.findAllPageable(pageable));
     }
     @PostMapping
-    public ResponseEntity<EmpresaDTO> create(@RequestBody @Validated EmpresaDTO data){
+    public ResponseEntity<EmpresaDTO> create(@RequestBody @Valid EmpresaDTO data){
         EmpresaDTO createdEmpresaDTO = empresaService.create(data);
         return ResponseEntity.created(URI.create("/api/v1/empresas/" + createdEmpresaDTO.getId()))
                 .body(createdEmpresaDTO);
     }
 
     @PutMapping
-    public ResponseEntity<Void> update(@RequestBody @Validated EmpresaDTO data){
+    public ResponseEntity<Void> update(@RequestBody @Valid EmpresaDTO data){
         empresaService.update(data);
         return ResponseEntity.noContent().build();
     }

@@ -7,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -29,14 +28,14 @@ public class AlertaController {
         return ResponseEntity.ok(alertaService.findAllPageable(pageable));
     }
     @PostMapping
-    public ResponseEntity<AlertaDTO> create(@RequestBody @Validated AlertaDTO data){
+    public ResponseEntity<AlertaDTO> create(@RequestBody @Valid AlertaDTO data){
         AlertaDTO createdAlertaDTO = alertaService.create(data);
         return ResponseEntity.created(URI.create("/api/v1/alertas/" + createdAlertaDTO.getId()))
                 .body(createdAlertaDTO);
     }
 
     @PutMapping
-    public ResponseEntity<Void> update(@RequestBody @Validated AlertaDTO data){
+    public ResponseEntity<Void> update(@RequestBody @Valid AlertaDTO data){
         alertaService.update(data);
         return ResponseEntity.noContent().build();
     }

@@ -7,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -29,14 +28,14 @@ public class AcoesMitigacaoController {
         return ResponseEntity.ok(acoesMitigacaoService.findAllPageable(pageable));
     }
     @PostMapping
-    public ResponseEntity<AcoesMitigacaoDTO> create(@RequestBody @Validated AcoesMitigacaoDTO data){
+    public ResponseEntity<AcoesMitigacaoDTO> create(@RequestBody @Valid AcoesMitigacaoDTO data){
         AcoesMitigacaoDTO createdAcoesMitigacaoDTO = acoesMitigacaoService.create(data);
         return ResponseEntity.created(URI.create("/api/v1/acoes/" + createdAcoesMitigacaoDTO.getId()))
                 .body(createdAcoesMitigacaoDTO);
     }
 
     @PutMapping
-    public ResponseEntity<Void> update(@RequestBody @Validated AcoesMitigacaoDTO data){
+    public ResponseEntity<Void> update(@RequestBody @Valid AcoesMitigacaoDTO data){
         acoesMitigacaoService.update(data);
         return ResponseEntity.noContent().build();
     }

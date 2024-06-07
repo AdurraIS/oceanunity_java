@@ -1,4 +1,5 @@
 package com.oceanunity.app.Controllers;
+
 import com.oceanunity.app.Exceptions.ObjectNotFoundException;
 import com.oceanunity.app.Infra.Security.TokenService;
 import com.oceanunity.app.Models.DTOs.AuthenticationDTO;
@@ -8,13 +9,13 @@ import com.oceanunity.app.Models.Entities.Usuario;
 import com.oceanunity.app.Models.Entities.UsuarioRoles;
 import com.oceanunity.app.Repositories.EmpresaRepository;
 import com.oceanunity.app.Repositories.UsuarioRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +39,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDTO> login(@RequestBody @Validated AuthenticationDTO data){
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid AuthenticationDTO data){
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.getEmail(), data.getSenha());
         var auth = this.authenticationManager.authenticate(usernamePassword);
         var token = tokenService.generateToken((Usuario) auth.getPrincipal());
@@ -46,7 +47,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(new LoginResponseDTO(token,usuario));
     }
     @PostMapping("/register")
-    public ResponseEntity<UsuarioDTO> register(@RequestBody @Validated UsuarioDTO data){
+    public ResponseEntity<UsuarioDTO> register(@RequestBody @Valid UsuarioDTO data){
         if(this.usuarioRepository.findByEmail(data.getEmail()) != null){
             return ResponseEntity.badRequest().build();
         }

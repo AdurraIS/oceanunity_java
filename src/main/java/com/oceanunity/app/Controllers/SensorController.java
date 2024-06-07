@@ -2,11 +2,11 @@ package com.oceanunity.app.Controllers;
 
 import com.oceanunity.app.Models.DTOs.SensorDTO;
 import com.oceanunity.app.Services.SensorService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -29,14 +29,14 @@ public class SensorController {
         return ResponseEntity.ok(sensorService.findAllByEmpresa(pageable, id));
     }
     @PostMapping
-    public ResponseEntity<SensorDTO> create(@RequestBody @Validated SensorDTO data){
+    public ResponseEntity<SensorDTO> create(@RequestBody @Valid SensorDTO data){
         SensorDTO createdSensorDTO = sensorService.create(data);
         return ResponseEntity.created(URI.create("/api/v1/sensores/" + createdSensorDTO.getId()))
                 .body(createdSensorDTO);
     }
 
     @PutMapping
-    public ResponseEntity<Void> update(@RequestBody @Validated SensorDTO data){
+    public ResponseEntity<Void> update(@RequestBody @Valid SensorDTO data){
         sensorService.update(data);
         return ResponseEntity.noContent().build();
     }

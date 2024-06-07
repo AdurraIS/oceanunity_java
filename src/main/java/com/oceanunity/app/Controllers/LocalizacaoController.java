@@ -2,11 +2,11 @@ package com.oceanunity.app.Controllers;
 
 import com.oceanunity.app.Models.DTOs.LocalizacaoDTO;
 import com.oceanunity.app.Services.LocalizacaoService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -28,14 +28,14 @@ public class LocalizacaoController {
         return ResponseEntity.ok(localizacaoService.findAllPageable(pageable));
     }
     @PostMapping
-    public ResponseEntity<LocalizacaoDTO> create(@RequestBody @Validated LocalizacaoDTO data){
+    public ResponseEntity<LocalizacaoDTO> create(@RequestBody @Valid LocalizacaoDTO data){
         LocalizacaoDTO createdLocalizacaoDTO = localizacaoService.create(data);
         return ResponseEntity.created(URI.create("/api/v1/localizacoes/" + createdLocalizacaoDTO.getId()))
                 .body(createdLocalizacaoDTO);
     }
 
     @PutMapping
-    public ResponseEntity<Void> update(@RequestBody @Validated LocalizacaoDTO data){
+    public ResponseEntity<Void> update(@RequestBody @Valid LocalizacaoDTO data){
         localizacaoService.update(data);
         return ResponseEntity.noContent().build();
     }

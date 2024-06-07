@@ -2,11 +2,11 @@ package com.oceanunity.app.Controllers;
 
 import com.oceanunity.app.Models.DTOs.LeituraDTO;
 import com.oceanunity.app.Services.LeituraService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -28,14 +28,14 @@ public class LeituraController {
         return ResponseEntity.ok(leituraService.findAllPageable(pageable));
     }
     @PostMapping
-    public ResponseEntity<LeituraDTO> create(@RequestBody @Validated LeituraDTO data){
+    public ResponseEntity<LeituraDTO> create(@RequestBody @Valid LeituraDTO data){
         LeituraDTO createdLeituraDTO = leituraService.create(data);
         return ResponseEntity.created(URI.create("/api/v1/leituras/" + createdLeituraDTO.getId()))
                 .body(createdLeituraDTO);
     }
 
     @PutMapping
-    public ResponseEntity<Void> update(@RequestBody @Validated LeituraDTO data){
+    public ResponseEntity<Void> update(@RequestBody @Valid LeituraDTO data){
         leituraService.update(data);
         return ResponseEntity.noContent().build();
     }
