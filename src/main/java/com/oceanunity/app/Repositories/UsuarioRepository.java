@@ -11,6 +11,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
+    //Busca usuario por nome ou telefone
+    Usuario findByNomeOrTelefone(String nome, String telefone);
+
     //Busca todos Usuarios de uma Empresa
     @Query("SELECT u FROM Usuario u WHERE u.empresa.id = :empresaId")
     Page<Usuario> findByEmpresa(Pageable pageable, Long empresaId);

@@ -1,5 +1,6 @@
 package com.oceanunity.app.Services;
 
+import com.oceanunity.app.Exceptions.ObjectNotFoundException;
 import com.oceanunity.app.Models.DTOs.LocalizacaoDTO;
 import com.oceanunity.app.Models.Entities.Localizacao;
 import com.oceanunity.app.Repositories.LocalizacaoRepository;
@@ -31,7 +32,8 @@ public class LocalizacaoService {
     //Método para atualizar Localizacao
     @Transactional
     public void update(LocalizacaoDTO data){
-        Localizacao localizacao = localizacaoRepository.findById(data.getId()).orElseThrow();
+        Localizacao localizacao = localizacaoRepository.findById(data.getId())
+                .orElseThrow(() -> new ObjectNotFoundException("Localização"));
         localizacaoRepository.save(dtoToObject(localizacao, data));
     }
 

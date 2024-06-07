@@ -1,5 +1,6 @@
 package com.oceanunity.app.Services;
 
+import com.oceanunity.app.Exceptions.ObjectNotFoundException;
 import com.oceanunity.app.Models.DTOs.EmpresaDTO;
 import com.oceanunity.app.Models.Entities.Empresa;
 import com.oceanunity.app.Repositories.EmpresaRepository;
@@ -34,7 +35,8 @@ public class EmpresaService {
     // Método para atualizar Empresa
     @Transactional
     public void update(EmpresaDTO data){
-        Empresa empresa = empresaRepository.findById(data.getId()).orElseThrow();
+        Empresa empresa = empresaRepository.findById(data.getId())
+                .orElseThrow(() -> new ObjectNotFoundException("Empresa"));
         empresaRepository.save(dtoToObject(empresa, data));
     }
 

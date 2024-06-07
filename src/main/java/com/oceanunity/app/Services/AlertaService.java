@@ -1,5 +1,6 @@
 package com.oceanunity.app.Services;
 
+import com.oceanunity.app.Exceptions.ObjectNotFoundException;
 import com.oceanunity.app.Models.DTOs.AlertaDTO;
 import com.oceanunity.app.Models.Entities.Alerta;
 import com.oceanunity.app.Repositories.AlertaRepository;
@@ -36,7 +37,8 @@ public class AlertaService {
     // Método para atualizar Alerta
     @Transactional
     public void update(AlertaDTO data){
-        Alerta alerta = alertaRepository.findById(data.getId()).orElseThrow();
+        Alerta alerta = alertaRepository.findById(data.getId())
+                .orElseThrow(() -> new ObjectNotFoundException("Alerta"));
         alertaRepository.save(dtoToObject(alerta, data));
     }
 
@@ -53,7 +55,7 @@ public class AlertaService {
         alerta.setData(data.getData());
         alerta.setResolucao(data.getResolucao());
         alerta.setLeitura(leituraRepository.findById(data.getLeituraId())
-                .orElseThrow());
+                .orElseThrow(()->new ObjectNotFoundException("Leitura")));
         return alerta;
     }
 }

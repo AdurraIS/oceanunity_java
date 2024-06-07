@@ -1,5 +1,6 @@
 package com.oceanunity.app.Services;
 
+import com.oceanunity.app.Exceptions.ObjectNotFoundException;
 import com.oceanunity.app.Models.DTOs.SensorDTO;
 import com.oceanunity.app.Models.Entities.Sensor;
 import com.oceanunity.app.Repositories.EmpresaRepository;
@@ -44,7 +45,8 @@ public class SensorService {
     //Método para atualizar Sensor
     @Transactional
     public void update(SensorDTO data){
-        Sensor sensor = sensorRepository.findById(data.getId()).orElseThrow();
+        Sensor sensor = sensorRepository.findById(data.getId())
+                .orElseThrow(()-> new ObjectNotFoundException("Sensor"));
         sensorRepository.save(dtoToObject(sensor, data));
     }
     //Método para deletar Sensor
@@ -61,11 +63,11 @@ public class SensorService {
         sensor.setFabricante(data.getFabricante());
         sensor.setData(data.getData());
         sensor.setPoluente(poluenteRepository.findById(data.getPoluenteId())
-                .orElseThrow());
+                .orElseThrow(()->new ObjectNotFoundException("Poluente")));
         sensor.setLocalizacao(localizacaoRepository.findById(data.getLocalizacao().getId())
-                .orElseThrow());
+                .orElseThrow(()->new ObjectNotFoundException("Localização")));
         sensor.setEmpresa(empresaRepository.findById(data.getEmpresaId())
-                .orElseThrow());
+                .orElseThrow(()->new ObjectNotFoundException("Empresa")));
         return sensor;
     }
 }

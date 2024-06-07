@@ -1,5 +1,6 @@
 package com.oceanunity.app.Services;
 
+import com.oceanunity.app.Exceptions.ObjectNotFoundException;
 import com.oceanunity.app.Models.DTOs.ManutencaoDTO;
 import com.oceanunity.app.Models.Entities.Manutencao;
 import com.oceanunity.app.Repositories.EmpresaRepository;
@@ -38,7 +39,8 @@ public class ManutencaoService {
     //Método para atualizar Manutencao
     @Transactional
     public void update(ManutencaoDTO data){
-        Manutencao manutencao = manutencaoRepository.findById(data.getId()).orElseThrow();
+        Manutencao manutencao = manutencaoRepository.findById(data.getId())
+                .orElseThrow(() -> new ObjectNotFoundException("Manutenção"));
         manutencaoRepository.save(dtoToObject(manutencao, data));
     }
 
@@ -53,9 +55,9 @@ public class ManutencaoService {
         manutencao.setDescricao(data.getDescricao());
         manutencao.setData(data.getData());
         manutencao.setSensor(sensorRepository.findById(data.getSensorId())
-                .orElseThrow());
+                .orElseThrow(()->new ObjectNotFoundException("Sensor")));
         manutencao.setEmpresa(empresaRepository.findById(data.getEmpresaId())
-                .orElseThrow());
+                .orElseThrow(()->new ObjectNotFoundException("Empresa")));
 
         return manutencao;
     }

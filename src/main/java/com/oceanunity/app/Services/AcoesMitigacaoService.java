@@ -1,5 +1,6 @@
 package com.oceanunity.app.Services;
 
+import com.oceanunity.app.Exceptions.ObjectNotFoundException;
 import com.oceanunity.app.Models.DTOs.AcoesMitigacaoDTO;
 import com.oceanunity.app.Models.Entities.AcoesMitigacao;
 import com.oceanunity.app.Repositories.AcoesMitigacaoRepository;
@@ -40,7 +41,8 @@ public class AcoesMitigacaoService {
     // Método para atualizar AcoesMitigacao
     @Transactional
     public void update(AcoesMitigacaoDTO data){
-        AcoesMitigacao acoesMitigacao = acoesMitigacaoRepository.findById(data.getId()).orElseThrow();
+        AcoesMitigacao acoesMitigacao = acoesMitigacaoRepository.findById(data.getId())
+                .orElseThrow(() -> new ObjectNotFoundException("Ação"));
         acoesMitigacaoRepository.save(dtoToObject(acoesMitigacao, data));
     }
 
@@ -59,9 +61,9 @@ public class AcoesMitigacaoService {
         acoesMitigacao.setDataInicio(data.getDataInicio());
         acoesMitigacao.setStatus(data.getStatus());
         acoesMitigacao.setEmpresa(empresaRepository.findById(data.getEmpresaId())
-                .orElseThrow());
+                .orElseThrow(()->new ObjectNotFoundException("Empresa")));
         acoesMitigacao.setPoluente(poluenteRepository.findById(data.getPoluenteId())
-                .orElseThrow());
+                .orElseThrow(()->new ObjectNotFoundException("Poluente")));
         return acoesMitigacao;
     }
 }

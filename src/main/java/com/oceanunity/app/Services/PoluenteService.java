@@ -1,5 +1,6 @@
 package com.oceanunity.app.Services;
 
+import com.oceanunity.app.Exceptions.ObjectNotFoundException;
 import com.oceanunity.app.Models.DTOs.PoluenteDTO;
 import com.oceanunity.app.Models.Entities.Poluente;
 import com.oceanunity.app.Repositories.ParametroRepository;
@@ -36,7 +37,8 @@ public class PoluenteService {
     //Método para atualizar Poluente
     @Transactional
     public void update(PoluenteDTO data){
-        Poluente poluente = poluenteRepository.findById(data.getId()).orElseThrow();
+        Poluente poluente = poluenteRepository.findById(data.getId())
+                .orElseThrow(() -> new ObjectNotFoundException("Poluente"));
         poluenteRepository.save(dtoToObject(poluente, data));
     }
     //Método para deletar Poluente
@@ -51,7 +53,7 @@ public class PoluenteService {
         poluente.setNome(data.getNome());
         poluente.setDescricao(data.getDescricao());
         poluente.setParametro(parametroRepository.findById(data.getParametroId())
-                .orElseThrow());
+                .orElseThrow(()->new ObjectNotFoundException("Parametro")));
         return poluente;
     }
 }

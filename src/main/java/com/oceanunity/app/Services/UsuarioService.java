@@ -1,5 +1,7 @@
 package com.oceanunity.app.Services;
 
+import com.oceanunity.app.Exceptions.ObjectAlreadyExistsException;
+import com.oceanunity.app.Exceptions.ObjectNotFoundException;
 import com.oceanunity.app.Models.DTOs.UsuarioDTO;
 import com.oceanunity.app.Models.Entities.Usuario;
 import com.oceanunity.app.Repositories.EmpresaRepository;
@@ -27,6 +29,10 @@ public class UsuarioService {
     //Método para criar Usuario
     public UsuarioDTO create(UsuarioDTO data){
         Usuario user = new Usuario();
+        var test = usuarioRepository.findByNomeOrTelefone(data.getNome(), data.getTelefone());
+        if(test!=null){
+            throw new ObjectAlreadyExistsException("Usuario");
+        }
         return new UsuarioDTO(usuarioRepository.save(dtoToObject(user,data)));
     }
     //Método para buscar Usuarios de uma Empresa
@@ -38,7 +44,8 @@ public class UsuarioService {
     //Método para atualizar Usuario
     @Transactional
     public void update(UsuarioDTO data){
-        Usuario usuario = usuarioRepository.findById(data.getId()).orElseThrow();
+        Usuario usuario = usuarioRepository.findById(data.getId())
+                .orElseThrow(() -> new ObjectNotFoundException("Usuario"));
         usuarioRepository.save(dtoToObject(usuario,data));
     }
     //Método para deletar Usuario
@@ -54,7 +61,7 @@ public class UsuarioService {
         usuario.setSenha(data.getSenha());
         usuario.setTelefone(data.getTelefone());
         usuario.setEmpresa(empresaRepository.findById(data.getEmpresaId())
-                .orElseThrow());
+                .orElseThrow(()-> new ObjectNotFoundException("Empresa")));
 
         return usuario;
     }

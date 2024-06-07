@@ -1,5 +1,6 @@
 package com.oceanunity.app.Services;
 
+import com.oceanunity.app.Exceptions.ObjectNotFoundException;
 import com.oceanunity.app.Models.DTOs.ParametroDTO;
 import com.oceanunity.app.Models.Entities.Parametro;
 import com.oceanunity.app.Repositories.ParametroRepository;
@@ -34,7 +35,8 @@ public class ParametroService {
     //Método para atualizar Parametro
     @Transactional
     public void update(ParametroDTO data){
-        Parametro parametro = parametroRepository.findById(data.getId()).orElseThrow();
+        Parametro parametro = parametroRepository.findById(data.getId())
+                .orElseThrow(()-> new ObjectNotFoundException("Parametro"));
         parametroRepository.save(dtoToObject(parametro, data));
     }
 

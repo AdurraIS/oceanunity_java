@@ -1,5 +1,6 @@
 package com.oceanunity.app.Services;
 
+import com.oceanunity.app.Exceptions.ObjectNotFoundException;
 import com.oceanunity.app.Models.DTOs.LeituraDTO;
 import com.oceanunity.app.Models.Entities.Leitura;
 import com.oceanunity.app.Repositories.LeituraRepository;
@@ -40,7 +41,8 @@ public class LeituraService {
     //Método para atualizar Leitura
     @Transactional
     public void update(LeituraDTO data){
-        Leitura leitura = leituraRepository.findById(data.getId()).orElseThrow();
+        Leitura leitura = leituraRepository.findById(data.getId())
+                .orElseThrow(() -> new ObjectNotFoundException("Leitura"));
         leituraRepository.save(dtoToObject(leitura, data));
     }
 
@@ -56,11 +58,11 @@ public class LeituraService {
         leitura.setValor(data.getValor());
         leitura.setData(data.getData());
         leitura.setPoluente(poluenteRepository.findById(data.getPoluenteId())
-                .orElseThrow());
+                .orElseThrow(()->new ObjectNotFoundException("Poluente")));
         leitura.setParametro(parametroRepository.findById(data.getParametroId())
-                .orElseThrow());
+                .orElseThrow(()->new ObjectNotFoundException("Parametro")));
         leitura.setSensor(sensorRepository.findById(data.getSensorId())
-                .orElseThrow());
+                .orElseThrow(()->new ObjectNotFoundException("Sensor")));
 
         return leitura;
     }
