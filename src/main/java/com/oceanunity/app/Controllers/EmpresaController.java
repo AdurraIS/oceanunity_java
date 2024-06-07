@@ -21,7 +21,7 @@ public class EmpresaController {
         this.empresaService = empresaService;
     }
 
-    @GetMapping("/empresa/{id}")
+    @GetMapping("/")
     public ResponseEntity<Page<EmpresaDTO>> findAll(@RequestParam(name = "page", defaultValue = "0") int page,
                                                    @RequestParam(name = "size", defaultValue = "10") int size){
         PageRequest pageable = PageRequest.of(page, size);

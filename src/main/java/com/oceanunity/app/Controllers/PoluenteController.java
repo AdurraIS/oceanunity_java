@@ -21,7 +21,7 @@ public class PoluenteController {
         this.poluenteService = poluenteService;
     }
 
-    @GetMapping("/empresa/{id}")
+    @GetMapping("/")
     public ResponseEntity<Page<PoluenteDTO>> findAll(@RequestParam(name = "page", defaultValue = "0") int page,
                                                    @RequestParam(name = "size", defaultValue = "10") int size){
         PageRequest pageable = PageRequest.of(page, size);
