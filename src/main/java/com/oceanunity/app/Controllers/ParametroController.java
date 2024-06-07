@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -27,14 +28,14 @@ public class ParametroController {
         return ResponseEntity.ok(parametroService.findAllPageable(pageable));
     }
     @PostMapping
-    public ResponseEntity<ParametroDTO> create(@RequestBody ParametroDTO data){
+    public ResponseEntity<ParametroDTO> create(@RequestBody @Validated ParametroDTO data){
         ParametroDTO createdParametroDTO = parametroService.create(data);
         return ResponseEntity.created(URI.create("/api/v1/parametros/" + createdParametroDTO.getId()))
                 .body(createdParametroDTO);
     }
 
     @PutMapping
-    public ResponseEntity<Void> update(@RequestBody ParametroDTO data){
+    public ResponseEntity<Void> update(@RequestBody @Validated ParametroDTO data){
         parametroService.update(data);
         return ResponseEntity.noContent().build();
     }

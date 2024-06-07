@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -27,14 +28,14 @@ public class ManutencaoController {
         return ResponseEntity.ok(manutencaoService.findAllPageable(pageable));
     }
     @PostMapping
-    public ResponseEntity<ManutencaoDTO> create(@RequestBody ManutencaoDTO data){
+    public ResponseEntity<ManutencaoDTO> create(@RequestBody @Validated ManutencaoDTO data){
         ManutencaoDTO createdManutencaoDTO = manutencaoService.create(data);
         return ResponseEntity.created(URI.create("/api/v1/manutencaos/" + createdManutencaoDTO.getId()))
                 .body(createdManutencaoDTO);
     }
 
     @PutMapping
-    public ResponseEntity<Void> update(@RequestBody ManutencaoDTO data){
+    public ResponseEntity<Void> update(@RequestBody @Validated ManutencaoDTO data){
         manutencaoService.update(data);
         return ResponseEntity.noContent().build();
     }
