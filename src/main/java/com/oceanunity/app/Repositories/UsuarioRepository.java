@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Set;
+
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
@@ -16,7 +18,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     //Busca todos Usuarios de uma Empresa
     @Query("SELECT u FROM Usuario u WHERE u.empresa.id = :empresaId")
-    Page<Usuario> findByEmpresa(Pageable pageable, Long empresaId);
+    Set<Usuario> findByEmpresa(Long empresaId);
 
     // Busca todos os usuários de uma empresa pelo nome
     @Query("SELECT u FROM Usuario u WHERE u.empresa.id = :empresaId AND LOWER(u.nome) LIKE LOWER(CONCAT('%', :nome, '%'))")

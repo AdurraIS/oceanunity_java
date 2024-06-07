@@ -37,8 +37,8 @@ public class UsuarioService {
     }
     //Método para buscar Usuarios de uma Empresa
     @Transactional
-    public Set<UsuarioDTO> findAllByEmpresa(Pageable pageable, Long id){
-        return usuarioRepository.findByEmpresa(pageable, id).stream()
+    public Set<UsuarioDTO> findAllByEmpresa(Long id){
+        return usuarioRepository.findByEmpresa(id).stream()
                 .map(UsuarioDTO::new).collect(Collectors.toSet());
     }
     //Método para atualizar Usuario

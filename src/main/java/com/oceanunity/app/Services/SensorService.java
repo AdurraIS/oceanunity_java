@@ -9,10 +9,10 @@ import com.oceanunity.app.Repositories.PoluenteRepository;
 import com.oceanunity.app.Repositories.SensorRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,9 +38,8 @@ public class SensorService {
     }
     //Método para buscar Sensores de uma Empresa
     @Transactional
-    public Set<SensorDTO> findAllByEmpresa(Pageable pageable, Long id){
-        return sensorRepository.findByEmpresa(pageable, id).stream()
-                .map(SensorDTO::new).collect(Collectors.toSet());
+    public Page<SensorDTO> findAllByEmpresa(Pageable pageable, Long id){
+        return sensorRepository.findByEmpresa(pageable, id).map(SensorDTO::new);
     }
     //Método para atualizar Sensor
     @Transactional
