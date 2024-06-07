@@ -12,7 +12,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class LocalizacaoDTO {
 
-    @NotNull(message = "Campo id não pode ser nulo")
     private Long id;
     @NotNull(message = "Campo latitude não pode ser nulo")
     private int latitude;

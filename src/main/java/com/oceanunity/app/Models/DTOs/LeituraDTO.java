@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class LeituraDTO {
 
-    @NotNull(message = "Campo id não pode ser nulo")
     private Long id;
     @NotNull(message = "Campo valor não pode ser nulo")
     private float valor;

@@ -5,12 +5,12 @@ import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class UsuarioDTO {
-    @NotNull(message = "Campo id não pode ser nulo")
     private Long id;
     @NotBlank(message = "Campo nome não pode ser vazio")
     private String nome;
@@ -18,8 +18,7 @@ public class UsuarioDTO {
     @NotBlank(message = "Campo email não pode ser vazio")
     private String email;
     @NotBlank(message = "Campo senha não pode ser vazio")
-    @Min(value = 6, message = "Senha deve conter no minimo 6 caracteres")
-    @Max(value = 16, message = "Senha não pode conter mais de 16 caracteres")
+    @Length(max = 16, min = 6)
     private String senha;
     private String telefone;
     @NotBlank(message = "Campo role não pode ser vazio")

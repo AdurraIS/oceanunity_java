@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 public class ManutencaoDTO {
-    @NotNull(message = "Campo id não pode ser nulo")
     private Long id;
     @NotBlank(message = "Campo descrição não pod ser vazio")
     private String descricao;

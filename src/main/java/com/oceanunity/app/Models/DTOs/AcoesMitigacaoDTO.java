@@ -2,7 +2,6 @@ package com.oceanunity.app.Models.DTOs;
 
 import com.oceanunity.app.Models.Entities.AcoesMitigacao;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,7 +11,6 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 public class AcoesMitigacaoDTO {
-    @NotNull(message = "Campo id não pode ser nulo")
     private Long id;
     @NotBlank(message = "Campo nome não pode ser vazio")
     private String nome;
