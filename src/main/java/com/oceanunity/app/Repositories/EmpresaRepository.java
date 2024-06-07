@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface EmpresaRepository extends JpaRepository<Empresa, Long> {
 
     //Busca todas as empresas paginadas
-    Page<Empresa> findAll(Pageable pageable);
+    Page<Empresa> findAllPageable(Pageable pageable);
 
     // Busca todoas as Empresas pelo nome
     @Query("SELECT u FROM Empresa u WHERE LOWER(u.nome) LIKE LOWER(CONCAT('%', :nome, '%'))")

@@ -1,5 +1,6 @@
 package com.oceanunity.app.Repositories;
 
+
 import com.oceanunity.app.Models.Entities.Manutencao;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ManutencaoRepository extends JpaRepository<Manutencao, Long> {
+
+    //Busca todas as manutenções paginadas
+    Page<Manutencao> findAllPageable(Pageable pageable);
 
     //Busca todas Manutenções de uma Empresa
     @Query("SELECT u FROM Manutencao u WHERE u.empresa.id = :empresaId")

@@ -1,5 +1,6 @@
 package com.oceanunity.app.Repositories;
 
+import com.oceanunity.app.Models.Entities.Poluente;
 import com.oceanunity.app.Models.Entities.Usuario;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

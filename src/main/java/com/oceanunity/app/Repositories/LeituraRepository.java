@@ -11,6 +11,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LeituraRepository extends JpaRepository<Leitura, Long> {
 
+    //Busca todas as leituras paginadas
+    Page<Leitura> findAllPageable(Pageable pageable);
+
+
     //Busca todas as Leituras feitas de um Poluente e retorna Paginado
     @Query("SELECT u FROM Leitura u WHERE u.poluente.id = :poluenteId")
     Page<Leitura> findByPoluente(Pageable pageable, Long poluenteId);

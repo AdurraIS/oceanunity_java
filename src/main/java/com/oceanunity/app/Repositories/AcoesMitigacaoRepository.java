@@ -10,6 +10,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AcoesMitigacaoRepository extends JpaRepository<AcoesMitigacao, Long> {
 
+    //Busca todas as acoes paginadas
+    Page<AcoesMitigacao> findAllPageable(Pageable pageable);
+
     //Busca todas Acoes por Empresa
     @Query("SELECT u FROM AcoesMitigacao u WHERE u.empresa.id = :empresaId")
     Page<AcoesMitigacao> findByEmpresa(Pageable pageable, Long empresaId);
