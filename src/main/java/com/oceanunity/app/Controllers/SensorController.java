@@ -21,7 +21,7 @@ public class SensorController {
         this.sensorService = sensorService;
     }
 
-    @GetMapping("/empresa/{id}")
+    @GetMapping("/")
     public ResponseEntity<Page<SensorDTO>> findAll(@RequestParam(name = "page", defaultValue = "0") int page,
                                                    @RequestParam(name = "size", defaultValue = "10") int size,
                                                    Long id){

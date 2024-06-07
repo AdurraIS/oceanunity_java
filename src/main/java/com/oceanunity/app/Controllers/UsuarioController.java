@@ -22,7 +22,7 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @GetMapping("/empresa/{id}")
+    @GetMapping("/")
     public ResponseEntity<Set<UsuarioDTO>> findAllByEmpresa(Long id){
         return ResponseEntity.ok(usuarioService.findAllByEmpresa(id));
     }

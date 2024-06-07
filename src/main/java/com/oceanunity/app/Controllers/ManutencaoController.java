@@ -21,7 +21,7 @@ public class ManutencaoController {
         this.manutencaoService = manutencaoService;
     }
 
-    @GetMapping("/empresa/{id}")
+    @GetMapping("/")
     public ResponseEntity<Page<ManutencaoDTO>> findAll(@RequestParam(name = "page", defaultValue = "0") int page,
                                                    @RequestParam(name = "size", defaultValue = "10") int size){
         PageRequest pageable = PageRequest.of(page, size);
