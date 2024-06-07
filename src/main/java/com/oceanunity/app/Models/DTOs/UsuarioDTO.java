@@ -22,6 +22,8 @@ public class UsuarioDTO {
     @Max(value = 16, message = "Senha não pode conter mais de 16 caracteres")
     private String senha;
     private String telefone;
+    @NotBlank(message = "Campo role não pode ser vazio")
+    private String role;
     @NotNull(message = "Usuario deve conter um id de empresa")
     private Long empresaId;
 
@@ -30,6 +32,7 @@ public class UsuarioDTO {
         this.nome = usuario.getNome();
         this.email = usuario.getEmail();
         this.senha = usuario.getSenha();
+        this.role = usuario.getRole().getRole();
         this.telefone = usuario.getTelefone();
         this.empresaId = usuario.getEmpresa().getId();
     }

@@ -4,6 +4,7 @@ import com.oceanunity.app.Exceptions.ObjectAlreadyExistsException;
 import com.oceanunity.app.Exceptions.ObjectNotFoundException;
 import com.oceanunity.app.Models.DTOs.UsuarioDTO;
 import com.oceanunity.app.Models.Entities.Usuario;
+import com.oceanunity.app.Models.Entities.UsuarioRoles;
 import com.oceanunity.app.Repositories.EmpresaRepository;
 import com.oceanunity.app.Repositories.UsuarioRepository;
 import jakarta.transaction.Transactional;
@@ -59,6 +60,7 @@ public class UsuarioService {
         usuario.setNome(data.getNome());
         usuario.setEmail(data.getEmail());
         usuario.setSenha(data.getSenha());
+        usuario.setRole(UsuarioRoles.valueOf(data.getRole()));
         usuario.setTelefone(data.getTelefone());
         usuario.setEmpresa(empresaRepository.findById(data.getEmpresaId())
                 .orElseThrow(()-> new ObjectNotFoundException("Empresa")));
