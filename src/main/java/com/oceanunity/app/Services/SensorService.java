@@ -2,6 +2,7 @@ package com.oceanunity.app.Services;
 
 import com.oceanunity.app.Exceptions.ObjectNotFoundException;
 import com.oceanunity.app.Models.DTOs.SensorDTO;
+import com.oceanunity.app.Models.Entities.Localizacao;
 import com.oceanunity.app.Models.Entities.Sensor;
 import com.oceanunity.app.Repositories.EmpresaRepository;
 import com.oceanunity.app.Repositories.LocalizacaoRepository;
@@ -23,17 +24,18 @@ public class SensorService {
     private final LocalizacaoRepository localizacaoRepository;
     private final PoluenteRepository poluenteRepository;
     @Autowired
-    public SensorService(SensorRepository sensorRepository, EmpresaRepository empresaRepository, LocalizacaoRepository localizacaoRepository, PoluenteRepository poluenteRepository) {
+    public SensorService(SensorRepository sensorRepository, EmpresaRepository empresaRepository, LocalizacaoRepository localizacaoRepository, PoluenteRepository poluenteRepository, LocalizacaoService localizacaoService) {
         this.sensorRepository = sensorRepository;
         this.empresaRepository = empresaRepository;
         this.localizacaoRepository = localizacaoRepository;
         this.poluenteRepository = poluenteRepository;
-
     }
 
     //Método para criar Sensor
     public SensorDTO create(SensorDTO data){
         Sensor sensor = new Sensor();
+        Localizacao localizacao = new Localizacao(data.getLocalizacao());
+        localizacaoRepository.save(localizacao);
         return new SensorDTO(sensorRepository.save(dtoToObject(sensor, data)));
     }
     //Método para buscar Sensores de uma Empresa

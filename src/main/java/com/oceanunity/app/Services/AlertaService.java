@@ -11,6 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Service
 public class AlertaService {
 
@@ -21,6 +24,10 @@ public class AlertaService {
     public AlertaService(AlertaRepository alertaRepository, LeituraRepository leituraRepository) {
         this.alertaRepository = alertaRepository;
         this.leituraRepository = leituraRepository;
+    }
+    //Método para buscar Alerta por Leitura
+    public Set<AlertaDTO> findByLeitura(Long leituraId){
+        return alertaRepository.findByLeitura(leituraId).stream().map(AlertaDTO::new).collect(Collectors.toSet());
     }
     // Método para criar Alerta
     public AlertaDTO create(AlertaDTO data){

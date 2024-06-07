@@ -1,5 +1,6 @@
 package com.oceanunity.app.Models.Entities;
 
+import com.oceanunity.app.Models.DTOs.LocalizacaoDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,5 +29,12 @@ public class Localizacao {
     private String descricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "localizacao")
     private Set<Sensor> sensors;
+
+    public Localizacao(LocalizacaoDTO localizacao) {
+        this.id = localizacao.getId();
+        this.descricao = localizacao.getDescricao();
+        this.longitude = localizacao.getLongitude();
+        this.latitude = localizacao.getLatitude();
+    }
 
 }
