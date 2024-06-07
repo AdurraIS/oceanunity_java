@@ -33,7 +33,7 @@ public class ManutencaoService {
     @Transactional
 
     public Page<ManutencaoDTO> findAllPageable(Pageable pageable){
-        return manutencaoRepository.findAllPageable(pageable).map(ManutencaoDTO::new);
+        return manutencaoRepository.findAll(pageable).map(ManutencaoDTO::new);
     }
 
     //Método para atualizar Manutencao

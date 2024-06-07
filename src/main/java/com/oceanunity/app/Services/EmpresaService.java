@@ -29,7 +29,7 @@ public class EmpresaService {
     // Método para buscar todas Empresas
     @Transactional
     public Page<EmpresaDTO> findAllPageable(Pageable pageable){
-        return empresaRepository.findAllPageable(pageable).map(EmpresaDTO::new);
+        return empresaRepository.findAll(pageable).map(EmpresaDTO::new);
     }
 
     // Método para atualizar Empresa

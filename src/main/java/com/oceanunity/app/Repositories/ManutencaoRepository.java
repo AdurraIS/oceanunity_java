@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface ManutencaoRepository extends JpaRepository<Manutencao, Long> {
 
     //Busca todas as manutenções paginadas
-    Page<Manutencao> findAllPageable(Pageable pageable);
+    Page<Manutencao> findAll(Pageable pageable);
 
     //Busca todas Manutenções de uma Empresa
     @Query("SELECT u FROM Manutencao u WHERE u.empresa.id = :empresaId")

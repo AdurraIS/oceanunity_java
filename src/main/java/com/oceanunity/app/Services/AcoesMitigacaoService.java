@@ -35,7 +35,7 @@ public class AcoesMitigacaoService {
     // Método para buscar todas AcoesMitigacao
     @Transactional
     public Page<AcoesMitigacaoDTO> findAllPageable(Pageable pageable){
-        return acoesMitigacaoRepository.findAllPageable(pageable).map(AcoesMitigacaoDTO::new);
+        return acoesMitigacaoRepository.findAll(pageable).map(AcoesMitigacaoDTO::new);
     }
 
     // Método para atualizar AcoesMitigacao

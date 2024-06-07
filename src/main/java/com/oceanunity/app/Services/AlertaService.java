@@ -31,7 +31,7 @@ public class AlertaService {
     // Método para buscar todos Alertas
     @Transactional
     public Page<AlertaDTO> findAllPageable(Pageable pageable){
-        return alertaRepository.findAllPageable(pageable).map(AlertaDTO::new);
+        return alertaRepository.findAll(pageable).map(AlertaDTO::new);
     }
 
     // Método para atualizar Alerta

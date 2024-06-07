@@ -35,7 +35,7 @@ public class LeituraService {
     //Método para buscar todas Leituras
     @Transactional
     public Page<LeituraDTO> findAllPageable(Pageable pageable){
-        return leituraRepository.findAllPageable(pageable).map(LeituraDTO::new);
+        return leituraRepository.findAll(pageable).map(LeituraDTO::new);
     }
 
     //Método para atualizar Leitura

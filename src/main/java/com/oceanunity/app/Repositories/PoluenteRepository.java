@@ -12,7 +12,7 @@ public interface PoluenteRepository extends JpaRepository<Poluente,Long> {
 
 
     //Busca todos os poluentes paginados
-    Page<Poluente> findAllPageable(Pageable pageable);
+    Page<Poluente> findAll(Pageable pageable);
     //Busca Poluentes por Parametros
     @Query("SELECT u FROM Poluente u WHERE u.parametro.id = :parametroId")
     Page<Poluente> findByParametro(Pageable pageable, Long parametroId);

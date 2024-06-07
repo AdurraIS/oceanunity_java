@@ -29,7 +29,7 @@ public class ParametroService {
     //Método para buscar todos Parametros
     @Transactional
     public Page<ParametroDTO> findAllPageable(Pageable pageable){
-        return parametroRepository.findAllPageable(pageable).map(ParametroDTO::new);
+        return parametroRepository.findAll(pageable).map(ParametroDTO::new);
     }
 
     //Método para atualizar Parametro

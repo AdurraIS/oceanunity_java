@@ -32,7 +32,7 @@ public class PoluenteService {
     //Método para buscar todos Poluentes
     @Transactional
     public Page<PoluenteDTO> findAll(Pageable pageable){
-        return poluenteRepository.findAllPageable(pageable).map(PoluenteDTO::new);
+        return poluenteRepository.findAll(pageable).map(PoluenteDTO::new);
     }
     //Método para atualizar Poluente
     @Transactional

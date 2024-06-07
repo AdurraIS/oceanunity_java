@@ -26,7 +26,7 @@ public class LocalizacaoService {
     //Método para buscar todas Localizacoes
     @Transactional
     public Page<LocalizacaoDTO> findAllPageable(Pageable pageable){
-        return localizacaoRepository.findAllPageable(pageable).map(LocalizacaoDTO::new);
+        return localizacaoRepository.findAll(pageable).map(LocalizacaoDTO::new);
     }
 
     //Método para atualizar Localizacao

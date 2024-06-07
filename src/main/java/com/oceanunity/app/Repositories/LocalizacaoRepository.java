@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LocalizacaoRepository extends JpaRepository<Localizacao, Long> {
     //Busca todas as localizações paginadas
-    Page<Localizacao> findAllPageable(Pageable pageable);
+    Page<Localizacao> findAll(Pageable pageable);
 }

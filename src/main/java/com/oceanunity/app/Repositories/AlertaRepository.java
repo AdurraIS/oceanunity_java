@@ -13,7 +13,7 @@ import java.util.List;
 public interface AlertaRepository extends JpaRepository<Alerta, Long> {
 
     //Busca todos os alertas paginadas
-    Page<Alerta> findAllPageable(Pageable pageable);
+    Page<Alerta> findAll(Pageable pageable);
 
     //Busca os Alertas de uma Leitura
     @Query("SELECT u FROM Alerta u WHERE u.leitura.id = :leituraId")

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 public interface SensorRepository extends JpaRepository<Sensor, Long> {
 
     //Busca todos os sensores paginados
-    Page<Sensor> findAllPageable(Pageable pageable);
+    Page<Sensor> findAll(Pageable pageable);
 
     //Busca Sensor de um Poluente e de uma Empresa e retorna Paginado
     @Query("SELECT s FROM Sensor s WHERE s.poluente.id = :poluenteId AND s.empresa.id = :empresaId")

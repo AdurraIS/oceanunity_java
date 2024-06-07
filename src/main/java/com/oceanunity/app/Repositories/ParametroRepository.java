@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface ParametroRepository extends JpaRepository<Parametro, Long> {
 
     //Busca todos os parametros paginados
-    Page<Parametro> findAllPageable(Pageable pageable);
+    Page<Parametro> findAll(Pageable pageable);
 
     // Busca um parâmetro por leitura
     @Query("SELECT p FROM Parametro p WHERE :leituraId IN (SELECT leitura.id FROM p.leituras leitura)")

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface LeituraRepository extends JpaRepository<Leitura, Long> {
 
     //Busca todas as leituras paginadas
-    Page<Leitura> findAllPageable(Pageable pageable);
+    Page<Leitura> findAll(Pageable pageable);
 
 
     //Busca todas as Leituras feitas de um Poluente e retorna Paginado
