@@ -5,7 +5,10 @@ import com.oceanunity.app.Models.Entities.Alerta;
 import com.oceanunity.app.Repositories.AlertaRepository;
 import com.oceanunity.app.Repositories.LeituraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AlertaService {
@@ -17,6 +20,30 @@ public class AlertaService {
     public AlertaService(AlertaRepository alertaRepository, LeituraRepository leituraRepository) {
         this.alertaRepository = alertaRepository;
         this.leituraRepository = leituraRepository;
+    }
+    // Método para criar Alerta
+    public AlertaDTO create(AlertaDTO data){
+        Alerta alerta = new Alerta();
+        return new AlertaDTO(alertaRepository.save(dtoToObject(alerta, data)));
+    }
+
+    // Método para buscar todos Alertas
+    @Transactional
+    public Page<AlertaDTO> findAllPageable(Pageable pageable){
+        return alertaRepository.findAllPageable(pageable).map(AlertaDTO::new);
+    }
+
+    // Método para atualizar Alerta
+    @Transactional
+    public void update(AlertaDTO data){
+        Alerta alerta = alertaRepository.findById(data.getId()).orElseThrow();
+        alertaRepository.save(dtoToObject(alerta, data));
+    }
+
+    // Método para deletar Alerta
+    @Transactional
+    public void delete(Long id){
+        alertaRepository.deleteById(id);
     }
 
     public Alerta dtoToObject(Alerta alerta, AlertaDTO data){

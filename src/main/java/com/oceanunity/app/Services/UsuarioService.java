@@ -4,8 +4,13 @@ import com.oceanunity.app.Models.DTOs.UsuarioDTO;
 import com.oceanunity.app.Models.Entities.Usuario;
 import com.oceanunity.app.Repositories.EmpresaRepository;
 import com.oceanunity.app.Repositories.UsuarioRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UsuarioService {
@@ -17,6 +22,29 @@ public class UsuarioService {
     public UsuarioService(UsuarioRepository usuarioRepository, EmpresaRepository empresaRepository) {
         this.usuarioRepository = usuarioRepository;
         this.empresaRepository = empresaRepository;
+    }
+
+    //Método para criar Usuario
+    public UsuarioDTO create(UsuarioDTO data){
+        Usuario user = new Usuario();
+        return new UsuarioDTO(usuarioRepository.save(dtoToObject(user,data)));
+    }
+    //Método para buscar Usuarios de uma Empresa
+    @Transactional
+    public Set<UsuarioDTO> findAllByEmpresa(Pageable pageable, Long id){
+        return usuarioRepository.findByEmpresa(pageable, id).stream()
+                .map(UsuarioDTO::new).collect(Collectors.toSet());
+    }
+    //Método para atualizar Usuario
+    @Transactional
+    public void update(UsuarioDTO data){
+        Usuario usuario = usuarioRepository.findById(data.getId()).orElseThrow();
+        usuarioRepository.save(dtoToObject(usuario,data));
+    }
+    //Método para deletar Usuario
+    @Transactional
+    public void delete(Long id){
+        usuarioRepository.deleteById(id);
     }
 
     public Usuario dtoToObject(Usuario usuario, UsuarioDTO data){

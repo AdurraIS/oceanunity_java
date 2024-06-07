@@ -6,7 +6,10 @@ import com.oceanunity.app.Repositories.LeituraRepository;
 import com.oceanunity.app.Repositories.ParametroRepository;
 import com.oceanunity.app.Repositories.PoluenteRepository;
 import com.oceanunity.app.Repositories.SensorRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class LeituraService {
@@ -21,6 +24,32 @@ public class LeituraService {
         this.parametroRepository = parametroRepository;
         this.sensorRepository = sensorRepository;
     }
+
+    //Método para criar Leitura
+    public LeituraDTO create(LeituraDTO data){
+        Leitura leitura = new Leitura();
+        return new LeituraDTO(leituraRepository.save(dtoToObject(leitura, data)));
+    }
+
+    //Método para buscar todas Leituras
+    @Transactional
+    public Page<LeituraDTO> findAllPageable(Pageable pageable){
+        return leituraRepository.findAllPageable(pageable).map(LeituraDTO::new);
+    }
+
+    //Método para atualizar Leitura
+    @Transactional
+    public void update(LeituraDTO data){
+        Leitura leitura = leituraRepository.findById(data.getId()).orElseThrow();
+        leituraRepository.save(dtoToObject(leitura, data));
+    }
+
+    //Método para deletar Leitura
+    @Transactional
+    public void delete(Long id){
+        leituraRepository.deleteById(id);
+    }
+
 
     public Leitura dtoToObject(Leitura leitura, LeituraDTO data){
         leitura.setId(data.getId());

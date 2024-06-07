@@ -6,8 +6,13 @@ import com.oceanunity.app.Repositories.EmpresaRepository;
 import com.oceanunity.app.Repositories.LocalizacaoRepository;
 import com.oceanunity.app.Repositories.PoluenteRepository;
 import com.oceanunity.app.Repositories.SensorRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class SensorService {
@@ -24,6 +29,30 @@ public class SensorService {
         this.poluenteRepository = poluenteRepository;
 
     }
+
+    //Método para criar Sensor
+    public SensorDTO create(SensorDTO data){
+        Sensor sensor = new Sensor();
+        return new SensorDTO(sensorRepository.save(dtoToObject(sensor, data)));
+    }
+    //Método para buscar Sensores de uma Empresa
+    @Transactional
+    public Set<SensorDTO> findAllByEmpresa(Pageable pageable, Long id){
+        return sensorRepository.findByEmpresa(pageable, id).stream()
+                .map(SensorDTO::new).collect(Collectors.toSet());
+    }
+    //Método para atualizar Sensor
+    @Transactional
+    public void update(SensorDTO data){
+        Sensor sensor = sensorRepository.findById(data.getId()).orElseThrow();
+        sensorRepository.save(dtoToObject(sensor, data));
+    }
+    //Método para deletar Sensor
+    @Transactional
+    public void delete(Long id){
+        sensorRepository.deleteById(id);
+    }
+
 
     public Sensor dtoToObject(Sensor sensor, SensorDTO data){
         sensor.setId(data.getId());

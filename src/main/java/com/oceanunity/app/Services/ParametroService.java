@@ -3,7 +3,12 @@ package com.oceanunity.app.Services;
 import com.oceanunity.app.Models.DTOs.ParametroDTO;
 import com.oceanunity.app.Models.Entities.Parametro;
 import com.oceanunity.app.Repositories.ParametroRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 public class ParametroService {
@@ -13,6 +18,32 @@ public class ParametroService {
     public ParametroService(ParametroRepository parametroRepository) {
         this.parametroRepository = parametroRepository;
     }
+
+    //Método para criar Parametro
+    public ParametroDTO create(ParametroDTO data){
+        Parametro parametro = new Parametro();
+        return new ParametroDTO(parametroRepository.save(dtoToObject(parametro, data)));
+    }
+
+    //Método para buscar todos Parametros
+    @Transactional
+    public Page<ParametroDTO> findAllPageable(Pageable pageable){
+        return parametroRepository.findAllPageable(pageable).map(ParametroDTO::new);
+    }
+
+    //Método para atualizar Parametro
+    @Transactional
+    public void update(ParametroDTO data){
+        Parametro parametro = parametroRepository.findById(data.getId()).orElseThrow();
+        parametroRepository.save(dtoToObject(parametro, data));
+    }
+
+    //Método para deletar Parametro
+    @Transactional
+    public void delete(Long id){
+        parametroRepository.deleteById(id);
+    }
+
 
     public Parametro dtoToObject(Parametro parametro, ParametroDTO data){
         parametro.setId(data.getId());
