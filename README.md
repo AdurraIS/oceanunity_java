@@ -52,6 +52,10 @@ endpoint base /api/v1/**
 - "/api/v1/acoes/poluente/{poluenteId}" - Get todas ações de um poluente
 - "/api/v1/acoes/empresa/{empresaId}/poluente/{poluenteId}" - Get todas ações de uma empresa e de determinado Poluente
 - "/api/v1/alertas/leitura/{leituraId}" - Get todos Alertas de determinada Leitura
+
+## Diagrama do Banco de Dados
+![Banco de dados](https://github.com/AdurraIS/oceanunity_java/assets/119917719/ab83a063-9eb2-405d-b491-249d45f79def)
+
 ## Equipe:
 | Registro | Nome  | Responsabilidade | Disciplinas|
 | ------------- | ------------- | ------------- | ------------- |
