@@ -41,7 +41,17 @@ detectar plásticos na superfície da areia, podendo tanto ser utilizada em came
 - Testar qualquer endpoint de acordo com a ROLE do Usuario que voce fez Login
 
 ### Principais Endpoints
-  
+endpoint base /api/v1/**
+#### CRUD - /empresas /alertas /localizacoes /leituras /poluentes /parametros /acoes
+  - "/" - Get Pageable
+  - "/" - Post Create
+  - "/{id}" - Delete
+  - "/" - Put Update
+#### Personalizadas
+- "/api/v1/acoes/empresa/{empresaId}" - Get todas ações de uma empresa
+- "/api/v1/acoes/poluente/{poluenteId}" - Get todas ações de um poluente
+- "/api/v1/acoes/empresa/{empresaId}/poluente/{poluenteId}" - Get todas ações de uma empresa e de determinado Poluente
+- "/api/v1/alertas/leitura/{leituraId}" - Get todos Alertas de determinada Leitura
 ## Equipe:
 | Registro | Nome  | Responsabilidade | Disciplinas|
 | ------------- | ------------- | ------------- | ------------- |
