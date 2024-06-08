@@ -16,9 +16,7 @@ public class AcoesMitigacaoDTO {
     private String nome;
     @NotBlank(message = "Campo descrição não pode ser vazio")
     private String descricao;
-    @NotBlank(message = "Campo data do inicio não pode ser vazio")
     private LocalDateTime dataInicio;
-    @NotBlank(message = "Campo data do fim não pode ser vazio")
     private LocalDateTime dataFim;
     @NotBlank(message = "Campo status não pode ser vazio")
     private String status;

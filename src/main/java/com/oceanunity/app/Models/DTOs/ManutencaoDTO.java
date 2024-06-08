@@ -16,7 +16,6 @@ public class ManutencaoDTO {
     private Long id;
     @NotBlank(message = "Campo descrição não pod ser vazio")
     private String descricao;
-    @NotBlank(message = "Campo data da manutenção não pode ser vazio")
     private LocalDateTime data;
     @NotNull(message = "Campo Id do sensor não pode ser nulo")
     private Long sensorId;

@@ -5,6 +5,7 @@ import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 @Getter
 @Setter
@@ -17,8 +18,7 @@ public class EmpresaDTO {
     @NotBlank(message = "Campo email não pode ser vazio")
     private String email;
     @NotBlank(message = "Campo UF não pode ser vazio")
-    @Max(value = 2)
-    @Min(value = 2)
+    @Length(max = 2, min = 2)
     private String uf;
     private String telefone;
 
