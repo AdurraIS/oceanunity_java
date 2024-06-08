@@ -21,10 +21,10 @@ public class SensorController {
         this.sensorService = sensorService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/empresa/{id}")
     public ResponseEntity<Page<SensorDTO>> findAll(@RequestParam(name = "page", defaultValue = "0") int page,
                                                    @RequestParam(name = "size", defaultValue = "10") int size,
-                                                   Long id){
+                                                   @PathVariable Long id){
         PageRequest pageable = PageRequest.of(page, size);
         return ResponseEntity.ok(sensorService.findAllByEmpresa(pageable, id));
     }
@@ -41,7 +41,7 @@ public class SensorController {
         return ResponseEntity.noContent().build();
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         sensorService.delete(id);
         return ResponseEntity.noContent().build();
 
