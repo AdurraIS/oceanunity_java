@@ -55,6 +55,8 @@ endpoint base /api/v1/**
 
 ## Diagrama do Banco de Dados
 ![Banco de dados](https://github.com/AdurraIS/oceanunity_java/assets/119917719/ab83a063-9eb2-405d-b491-249d45f79def)
+## Estrutura do Projeto
+![Diagrama](https://github.com/AdurraIS/oceanunity_java/assets/119917719/3f7e4db9-3b76-4a28-8c64-1678e32eb73e)
 
 ## Equipe:
 | Registro | Nome  | Responsabilidade | Disciplinas|
