@@ -40,7 +40,7 @@ public class ManutencaoController {
         return ResponseEntity.noContent().build();
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         manutencaoService.delete(id);
         return ResponseEntity.noContent().build();
 

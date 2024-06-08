@@ -22,7 +22,7 @@ public class AlertaController {
         this.alertaService = alertaService;
     }
     @GetMapping("/leitura/{leituraId}")
-    public ResponseEntity<Set<AlertaDTO>> findByLeitura(Long leituraId){
+    public ResponseEntity<Set<AlertaDTO>> findByLeitura(@PathVariable Long leituraId){
         return ResponseEntity.ok(alertaService.findByLeitura(leituraId));
 
     }
@@ -45,7 +45,7 @@ public class AlertaController {
         return ResponseEntity.noContent().build();
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         alertaService.delete(id);
         return ResponseEntity.noContent().build();
 

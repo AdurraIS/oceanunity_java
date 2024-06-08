@@ -22,20 +22,20 @@ public class AcoesMitigacaoController {
     }
     @GetMapping("/empresa/{empresaId}")
     public ResponseEntity<Page<AcoesMitigacaoDTO>> findAllByEmpresa(@RequestParam(name = "page", defaultValue = "0") int page,
-                                                                    @RequestParam(name = "size", defaultValue = "10") int size, long empresaId){
+                                                                    @RequestParam(name = "size", defaultValue = "10") int size,@PathVariable long empresaId){
         PageRequest pageable = PageRequest.of(page, size);
         return ResponseEntity.ok(acoesMitigacaoService.findAllByEmpresa(pageable, empresaId));
     }
     @GetMapping("/poluente/{poluenteId}")
     public ResponseEntity<Page<AcoesMitigacaoDTO>> findAllByPoluente(@RequestParam(name = "page", defaultValue = "0") int page,
-                                                                    @RequestParam(name = "size", defaultValue = "10") int size, long poluenteId){
+                                                                    @RequestParam(name = "size", defaultValue = "10") int size,@PathVariable long poluenteId){
         PageRequest pageable = PageRequest.of(page, size);
         return ResponseEntity.ok(acoesMitigacaoService.findAllByPoluente(pageable, poluenteId));
     }
     @GetMapping("/empresa/{empresaId}/poluente/{poluenteId}")
     public ResponseEntity<Page<AcoesMitigacaoDTO>> findAllByEmpresaAndPoluente(@RequestParam(name = "page", defaultValue = "0") int page,
                                                                     @RequestParam(name = "size", defaultValue = "10") int size,
-                                                                               long empresaId, long poluenteId){
+                                                                               @PathVariable long empresaId, @PathVariable long poluenteId){
         PageRequest pageable = PageRequest.of(page, size);
         return ResponseEntity.ok(acoesMitigacaoService.findAllByEmpresaAndPoluente(pageable, empresaId,poluenteId ));
     }
@@ -59,7 +59,7 @@ public class AcoesMitigacaoController {
         return ResponseEntity.noContent().build();
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         acoesMitigacaoService.delete(id);
         return ResponseEntity.noContent().build();
 

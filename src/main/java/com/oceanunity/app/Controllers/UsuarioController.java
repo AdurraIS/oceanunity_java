@@ -22,8 +22,8 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @GetMapping("/")
-    public ResponseEntity<Set<UsuarioDTO>> findAllByEmpresa(Long id){
+    @GetMapping("/empresa/{id}")
+    public ResponseEntity<Set<UsuarioDTO>> findAllByEmpresa(@PathVariable Long id){
         return ResponseEntity.ok(usuarioService.findAllByEmpresa(id));
     }
     @PostMapping
@@ -39,7 +39,7 @@ public class UsuarioController {
         return ResponseEntity.noContent().build();
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(Long id){
+    public ResponseEntity<Void> delete( @PathVariable Long id){
         usuarioService.delete(id);
         return ResponseEntity.noContent().build();
     }
